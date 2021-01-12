@@ -51,5 +51,5 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #########################################################################
 								TODO
 #########################################################################
-# TODO: add tilting to sprite import to reduce layers needed
-# TODO: use shaders to do distortion effects.
+# TODO: add manager object to support multiple models
+# TODO: figure out why large models are blurry.

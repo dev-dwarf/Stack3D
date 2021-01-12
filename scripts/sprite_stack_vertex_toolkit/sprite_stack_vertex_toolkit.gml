@@ -33,8 +33,7 @@ function load_stacked_sprite(sprite_index, sprite_texture, layer_count, vertex_f
 	var vertex_buffer = vertex_create_buffer();
 	
 	// get the texture and its UVs, so that we can build the model
-	var texture = sprite_get_texture(sprite_index, 0);
-	var uvs = texture_get_uvs(texture);
+	var uvs = texture_get_uvs(sprite_texture);
 
 	// begin construction of the model
 	vertex_begin(vertex_buffer, vertex_format);
