@@ -1,6 +1,8 @@
 # Stack3D
 The fastest method of Sprite Stacking in Gamemaker!
 
+## As a benchmark, using this technique I can have 3000 sprite stacked models drawing at once at 60 fps. Using normal sprite stacking I can have about 200 at 60 fps.
+
 # INTRO
 Hello! This is a message from me, dev_dwarf, who created this example project.
 
