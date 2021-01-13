@@ -23,9 +23,9 @@ which you should probably freeze using vertex_freeze to increase performance. Th
 to draw the model. You will find attached examples of all of this in o3Dtest.
 
 Pros:
-	Incredible performance over normal sprite stacking
-	Rotation in all axis
-	Simplified workflow, due to being able to directly import models from MagicaVoxel (use o slice)
+	Incredible performance over normal sprite stacking.
+	Rotation in all axis.
+	Simplified workflow, due to being able to directly import models from MagicaVoxel (use o slice).
 	
 Cons:
 	Discards camera system. Due to the 3d functions being used, default camera functions no longer work.
@@ -35,6 +35,11 @@ In order to use the system in your own projects, copy over the sprite_stack_vert
 build your own system to do depth sorting and handle loading different models, or use a modified version of mine.
 
 There are also a few shaders as examples of how you could achieve certain effects.
+
+## IMPORTANT: YOU WILL NEED TO CHANGE THE SETTINGS OF THE TEXTURE GROUPS!
+
+go to tools > texture groups and disable automatic crop. If you have large models, you may also need
+to increase the size of your texture pages
 	
 #########################################################################
 							MIT LICENSE
@@ -51,5 +56,4 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #########################################################################
 								TODO
 #########################################################################
-# TODO: add manager object to support multiple models
 # TODO: figure out why large models are blurry.

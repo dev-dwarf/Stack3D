@@ -35,8 +35,7 @@ for (var i = 0; i < ds_grid_height(depth_grid); i++) {
 	var inst = depth_grid[# 0, i];
 
 	with inst {
-		// draws the object
-		draw_stacked_self(other.vertex_buffer, other.texture);
+		event_perform(ev_draw, 0);
 	}
 }
 

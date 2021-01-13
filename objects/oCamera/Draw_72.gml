@@ -20,3 +20,13 @@ var proj_matrix = matrix_build_projection_ortho(256/camera_zoom, 144/camera_zoom
 camera_set_view_mat(camera, view_matrix);
 camera_set_proj_mat(camera, proj_matrix);
 camera_apply(camera);
+
+// build matrix for billboarding
+
+// for cylindrical billboarding -- i prefered this, with a slight tilt, so that the billboarded sprites are still somewhat affected by the camera angle
+var tilt_matrix = matrix_build(0, 0, 0, -45, 0, -camera_angle, 1.0, 1.0, 1.0);
+
+// for spherical billboarding uncomment
+//var tilt_matrix = matrix_build(0, 0, 0, -incline_angle, 0, -camera_angle, 1.0, 1.0, 1.0);
+
+billboard_matrix = tilt_matrix;

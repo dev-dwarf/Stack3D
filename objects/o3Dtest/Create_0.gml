@@ -5,14 +5,8 @@ depth_grid = -1;
 shader_mode = 6;
 
 // lower values will increase performance, but can make the background appear through models
-stacking_fidelity = 4;
+stacking_fidelity = 6;
 
-// SPAWN INSTANCES FOR A STRESS TEST
-repeat(2000) {
-	with instance_create_layer(irandom(room_width*2)*choose(-1,1), irandom(room_width*2)*choose(-1,1), layer, oCup) {
-		image_angle = irandom(360);
-	}
-}
 
 // FUNCTION FOR DEPTH SORTING
 function compute_3d_depth() {
@@ -32,13 +26,21 @@ function compute_3d_depth() {
 
 // CREATE A FORMAT AND RETRIEVE THE TEXTURE FOR THE SPRITE STACKING TO USE
 format = create_vertex_format();
-texture = sprite_get_texture(sprite_index, 0);
 
-// USE THE FUNCTIONS TO LOAD THE MODEL
-vertex_buffer = load_stacked_sprite(sprite_index, texture, sprite_height/sprite_width, format, stacking_fidelity);
+textures = ds_map_create();
+buffers = ds_map_create();
 
-// FREEZE THE MODEL (optional)
-vertex_freeze(vertex_buffer); // makes the buffer read only, but increases performance significantly.
+function load_sprite(sprite_index, layer_count) {
+	if (is_undefined(buffers[? sprite_index])) {
+		textures[? sprite_index] = sprite_get_texture(sprite_index, 0);
+
+		// USE THE FUNCTIONS TO LOAD THE MODEL
+		buffers[? sprite_index] = load_stacked_sprite(sprite_index, layer_count, format, stacking_fidelity);
+
+		// FREEZE THE MODEL (optional)
+		vertex_freeze(buffers[? sprite_index]); // makes the buffer read only, but increases performance significantly.
+	}
+}
 
 
 #region shader uniforms

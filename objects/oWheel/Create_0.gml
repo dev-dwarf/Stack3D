@@ -4,5 +4,5 @@
 event_inherited();
 
 with o3Dtest {
-	load_sprite(other.sprite_index, 13);	
+	load_sprite(other.sprite_index, 80);	
 }

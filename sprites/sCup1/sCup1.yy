@@ -13,7 +13,7 @@
   "bbox_bottom": 166,
   "HTile": false,
   "VTile": false,
-  "For3D": true,
+  "For3D": false,
   "width": 13,
   "height": 169,
   "textureGroupId": {

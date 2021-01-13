@@ -21,6 +21,7 @@ camera_height = default_camera_height;
 
 mode = 0;
 
+billboard_matrix = -1;
 
 camera = view_camera[0];
 

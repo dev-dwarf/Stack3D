@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "sCup1",
-    "path": "sprites/sCup1/sCup1.yy",
+    "name": "Sprite8",
+    "path": "sprites/Sprite8/Sprite8.yy",
   },
   "solid": false,
   "visible": true,
@@ -24,8 +24,7 @@
   "physicsKinematic": false,
   "physicsShapePoints": [],
   "eventList": [
-    {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"parent":{"name":"oCup","path":"objects/oCup/oCup.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
-    {"isDnD":false,"eventNum":0,"eventType":8,"collisionObjectId":null,"parent":{"name":"oCup","path":"objects/oCup/oCup.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
+    {"isDnD":false,"eventNum":0,"eventType":8,"collisionObjectId":null,"parent":{"name":"oBillboard","path":"objects/oBillboard/oBillboard.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
   ],
   "properties": [],
   "overriddenProperties": [],
@@ -34,7 +33,7 @@
     "path": "folders/Objects.yy",
   },
   "resourceVersion": "1.0",
-  "name": "oCup",
+  "name": "oBillboard",
   "tags": [],
   "resourceType": "GMObject",
 }

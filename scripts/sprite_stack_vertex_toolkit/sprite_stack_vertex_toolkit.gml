@@ -27,13 +27,15 @@ vertex_format	--> previously made vertex format
 fidelity		--> the amount of repeated layers to create. (improves appearance of scaling and rotation)
 \\#######################################*/
 
-function load_stacked_sprite(sprite_index, sprite_texture, layer_count, vertex_format, fidelity) {
+function load_stacked_sprite(sprite_index, layer_count, vertex_format, fidelity) {
 	
 	// create the buffer
 	var vertex_buffer = vertex_create_buffer();
 	
 	// get the texture and its UVs, so that we can build the model
-	var uvs = texture_get_uvs(sprite_texture);
+	var uvs = sprite_get_uvs(sprite_index, 0);
+	
+	show_debug_message(string(uvs));
 
 	// begin construction of the model
 	vertex_begin(vertex_buffer, vertex_format);
@@ -66,15 +68,15 @@ function load_stacked_sprite(sprite_index, sprite_texture, layer_count, vertex_f
 			the amount of frames so far. texture_frame is floored so that duplicated layers
 			do not end up drawing middle portions of the image.
 		*/
-		vertex_texcoord(vertex_buffer, uvs[0], uvs[1] + uvs[3]*texture_frame*layer_size);
+		vertex_texcoord(vertex_buffer, uvs[0], uvs[1] + (uvs[3]-uvs[1])*texture_frame*layer_size);
 
 		vertex_position_3d(vertex_buffer, w, -h, -i*z_scale);
 		vertex_color(vertex_buffer, c_white, 1.0);
-		vertex_texcoord(vertex_buffer, uvs[2], uvs[1] + uvs[3]*texture_frame*layer_size);
+		vertex_texcoord(vertex_buffer, uvs[2], uvs[1] + (uvs[3]-uvs[1])*texture_frame*layer_size);
 	
 		vertex_position_3d(vertex_buffer, w, h, -i*z_scale);
 		vertex_color(vertex_buffer, c_white, 1.0);
-		vertex_texcoord(vertex_buffer, uvs[2], uvs[1] + uvs[3]*(texture_frame+1)*layer_size);
+		vertex_texcoord(vertex_buffer, uvs[2], uvs[1] + (uvs[3]-uvs[1])*(texture_frame+1)*layer_size);
 		#endregion
 	
 		// |\		construct 2nd triangle
@@ -85,15 +87,15 @@ function load_stacked_sprite(sprite_index, sprite_texture, layer_count, vertex_f
 		#region second triangle
 		vertex_position_3d(vertex_buffer, -w, -h, -i*z_scale);
 		vertex_color(vertex_buffer, c_white, 1.0);
-		vertex_texcoord(vertex_buffer, uvs[0], uvs[1] + uvs[3]*texture_frame*layer_size);
+		vertex_texcoord(vertex_buffer, uvs[0], uvs[1] + (uvs[3]-uvs[1])*texture_frame*layer_size);
 
 		vertex_position_3d(vertex_buffer, -w, h, -i*z_scale);
 		vertex_color(vertex_buffer, c_white, 1.0);
-		vertex_texcoord(vertex_buffer, uvs[0], uvs[1] + uvs[3]*(texture_frame+1)*layer_size);
+		vertex_texcoord(vertex_buffer, uvs[0], uvs[1] + (uvs[3]-uvs[1])*(texture_frame+1)*layer_size);
 
 		vertex_position_3d(vertex_buffer, w, h, -i*z_scale);
 		vertex_color(vertex_buffer, c_white, 1.0);
-		vertex_texcoord(vertex_buffer, uvs[2], uvs[1] + uvs[3]*(texture_frame+1)*layer_size);
+		vertex_texcoord(vertex_buffer, uvs[2], uvs[1] + (uvs[3]-uvs[1])*(texture_frame+1)*layer_size);
 		#endregion
 
 	}
@@ -158,4 +160,48 @@ function draw_stacked_sprite_ext(vertex_buffer, texture, x, y, z, x_angle, y_ang
 
 	// submits the model to the gpu for drawing
 	vertex_submit(vertex_buffer, pr_trianglelist, texture);
+}
+
+/*######### draw billboard self #########\\
+
+draws a billboarded sprite
+
+important notes: 
+1. you will have to manually reset the world matrix after drawing. Look at o3Dtest for an example.
+\\#######################################*/
+function draw_billboard_self() {
+	var inst_matrix = matrix_build( x, y, z, x_tilt, y_tilt, 0, image_xscale, image_yscale, image_zscale);
+	
+	matrix_set(matrix_world, matrix_multiply(oCamera.billboard_matrix, inst_matrix));
+	
+	draw_sprite_ext(sprite_index, image_index, 0, 0, 1.0, 1.0, 0, image_blend, image_alpha);
+}
+
+/*######### draw billboard ext #########\\
+
+draws a billboarded sprite
+
+important notes: 
+1. you will have to manually reset the world matrix after drawing. Look at o3Dtest for an example.
+
+sprite_index	--> sprite to use
+image_index		--> image to use
+x				--> x coord to draw at
+y				--> y coord to draw at
+z				--> z coord to draw at
+x_tilt			--> x angle to tilt the model
+y_tilt			--> y angle to tilt the model
+angle			--> z angle (used in a similar way to image_angle in 2d games)
+image_xscale	--> scale to apply along x axis of model
+image_yscale	--> scale to apply along y axis of model
+image_zscale	--> scale to apply along z axis of model
+image_blend		--> image_blend of the sprite
+image_alpha		--> image_alpha of the sprite
+\\#######################################*/
+function draw_billboard_ext(sprite_index, image_index, x, y, z, x_tilt, y_tilt, angle, image_xscale, image_yscale, image_zscale, image_blend, image_alpha) {
+	var inst_matrix = matrix_build( x, y, z, x_tilt, y_tilt, 0, image_xscale, image_yscale, image_zscale);
+	
+	matrix_set(matrix_world, matrix_multiply(oCamera.billboard_matrix, inst_matrix));
+	
+	draw_sprite_ext(sprite_index, image_index, 0, 0, 1.0, 1.0, 0, image_blend, image_alpha);
 }

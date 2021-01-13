@@ -8,14 +8,14 @@
   "collisionTolerance": 0,
   "swfPrecision": 2.525,
   "bbox_left": 0,
-  "bbox_right": 71,
-  "bbox_top": 971,
-  "bbox_bottom": 5727,
+  "bbox_right": 12,
+  "bbox_top": 0,
+  "bbox_bottom": 38,
   "HTile": false,
   "VTile": false,
-  "For3D": true,
-  "width": 72,
-  "height": 5760,
+  "For3D": false,
+  "width": 13,
+  "height": 39,
   "textureGroupId": {
     "name": "Default",
     "path": "texturegroups/Default",
@@ -24,12 +24,12 @@
   "gridX": 0,
   "gridY": 0,
   "frames": [
-    {"compositeImage":{"FrameId":{"name":"e661321e-3670-41ce-b680-d8e01e6f48d8","path":"sprites/sWheel1/sWheel1.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
-        {"FrameId":{"name":"e661321e-3670-41ce-b680-d8e01e6f48d8","path":"sprites/sWheel1/sWheel1.yy",},"LayerId":{"name":"19c89002-2fc1-45a1-b1e4-5f71d19cd73c","path":"sprites/sWheel1/sWheel1.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
-      ],"parent":{"name":"sWheel1","path":"sprites/sWheel1/sWheel1.yy",},"resourceVersion":"1.0","name":"e661321e-3670-41ce-b680-d8e01e6f48d8","tags":[],"resourceType":"GMSpriteFrame",},
+    {"compositeImage":{"FrameId":{"name":"18ab5a67-3180-458e-b88c-93d4aec74e08","path":"sprites/sCoin/sCoin.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
+        {"FrameId":{"name":"18ab5a67-3180-458e-b88c-93d4aec74e08","path":"sprites/sCoin/sCoin.yy",},"LayerId":{"name":"b3a68ecf-5f21-498c-b66e-57222a55d4f3","path":"sprites/sCoin/sCoin.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+      ],"parent":{"name":"sCoin","path":"sprites/sCoin/sCoin.yy",},"resourceVersion":"1.0","name":"18ab5a67-3180-458e-b88c-93d4aec74e08","tags":[],"resourceType":"GMSpriteFrame",},
   ],
   "sequence": {
-    "spriteId": {"name":"sWheel1","path":"sprites/sWheel1/sWheel1.yy",},
+    "spriteId": {"name":"sCoin","path":"sprites/sCoin/sCoin.yy",},
     "timeUnits": 1,
     "playback": 1,
     "playbackSpeed": 30.0,
@@ -41,7 +41,7 @@
     "moments": {"Keyframes":[],"resourceVersion":"1.0","resourceType":"KeyframeStore<MomentsEventKeyframe>",},
     "tracks": [
       {"name":"frames","spriteId":null,"keyframes":{"Keyframes":[
-            {"id":"ddb0992a-5ad4-4f09-b1ce-bf58ab59db1c","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"e661321e-3670-41ce-b680-d8e01e6f48d8","path":"sprites/sWheel1/sWheel1.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
+            {"id":"3972b5e9-61a2-4c62-9eff-35a6a093097c","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"18ab5a67-3180-458e-b88c-93d4aec74e08","path":"sprites/sCoin/sCoin.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
           ],"resourceVersion":"1.0","resourceType":"KeyframeStore<SpriteFrameKeyframe>",},"trackColour":0,"inheritsTrackColour":true,"builtinName":0,"traits":0,"interpolation":1,"tracks":[],"events":[],"modifiers":[],"isCreationTrack":false,"resourceVersion":"1.0","tags":[],"resourceType":"GMSpriteFramesTrack",},
     ],
     "visibleRange": null,
@@ -58,21 +58,21 @@
     "yorigin": 0,
     "eventToFunction": {},
     "eventStubScript": null,
-    "parent": {"name":"sWheel1","path":"sprites/sWheel1/sWheel1.yy",},
+    "parent": {"name":"sCoin","path":"sprites/sCoin/sCoin.yy",},
     "resourceVersion": "1.3",
-    "name": "sWheel1",
+    "name": "sCoin",
     "tags": [],
     "resourceType": "GMSequence",
   },
   "layers": [
-    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"19c89002-2fc1-45a1-b1e4-5f71d19cd73c","tags":[],"resourceType":"GMImageLayer",},
+    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"b3a68ecf-5f21-498c-b66e-57222a55d4f3","tags":[],"resourceType":"GMImageLayer",},
   ],
   "parent": {
     "name": "Sprites",
     "path": "folders/Sprites.yy",
   },
   "resourceVersion": "1.0",
-  "name": "sWheel1",
+  "name": "sCoin",
   "tags": [],
   "resourceType": "GMSprite",
 }
