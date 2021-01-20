@@ -37,7 +37,7 @@ function load_sprite(sprite_index, layer_count) {
 		textures[? sprite_index] = sprite_get_texture(sprite_index, 0);
 
 		// USE THE FUNCTIONS TO LOAD THE MODEL
-		buffers[? sprite_index] = load_stacked_sprite(sprite_index, layer_count, format, stacking_fidelity);
+		buffers[? sprite_index] = load_stack_sprite(sprite_index, layer_count, format, stacking_fidelity);
 
 		// FREEZE THE MODEL (optional)
 		vertex_freeze(buffers[? sprite_index]); // makes the buffer read only, but increases performance significantly.

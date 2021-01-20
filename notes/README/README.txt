@@ -18,7 +18,7 @@ This is a system to replace the naive sprite stacking technique with actual 3D.
 It works by loading in a voxel model as a vertex buffer, and then drawing it. Hopefully you won't have to 
 understand much of this to work with the system.
 
-Each 3d model you want to draw will need to be loaded using **load_stacked_sprite**. This will return a vertex buffer,
+Each 3d model you want to draw will need to be loaded using **load_stack_sprite**. This will return a vertex buffer,
 which you should probably freeze using vertex_freeze to increase performance. Then in the draw event you will use vertex_submit
 to draw the model. You will find attached examples of all of this in o3Dtest.
 

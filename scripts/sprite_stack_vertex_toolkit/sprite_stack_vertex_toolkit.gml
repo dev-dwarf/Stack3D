@@ -15,9 +15,9 @@ function create_vertex_format() {
 }
 
 
-/*######### load stacked sprite #########\\
+/*######### load stack sprite #########\\
 
-loads a sprite stacked model into memory
+loads a sprite stack model into memory
 
 sprite_index	--> sprite to use, (assumed to be just 1 image, no subimages)
 sprite_texture  --> texture of the sprite index. you will need this later to draw the model, 
@@ -27,7 +27,7 @@ vertex_format	--> previously made vertex format
 fidelity		--> the amount of repeated layers to create. (improves appearance of scaling and rotation)
 \\#######################################*/
 
-function load_stacked_sprite(sprite_index, layer_count, vertex_format, fidelity) {
+function load_stack_sprite(sprite_index, layer_count, vertex_format, fidelity) {
 	
 	// create the buffer
 	var vertex_buffer = vertex_create_buffer();
@@ -115,9 +115,9 @@ function load_stacked_sprite(sprite_index, layer_count, vertex_format, fidelity)
 }
 	
 	
-/*######### draw stacked self #########\\
+/*######### draw stack self #########\\
 
-draws a the instances stacked sprite model (ONLY USE IN DRAW EVENTS)
+draws a the instances stack sprite model (ONLY USE IN DRAW EVENTS)
 
 important notes: 
 1. you will have to manually reset the world matrix after drawing. Look at o3Dtest for an example.
@@ -127,7 +127,7 @@ vertex_buffer	--> the vertex buffer containing the 3d model to draw
 texture			--> the texture to apply to the model
 
 \\#######################################*/
-function draw_stacked_self(vertex_buffer, texture) {
+function draw_stack_self(vertex_buffer, texture) {
 	// builds a matrix that accounts for the objects position, angle(s), and scale
 	var inst_matrix = matrix_build( x, y, z, x_tilt, y_tilt, image_angle, image_xscale, image_yscale, image_zscale);
 	
@@ -139,9 +139,9 @@ function draw_stacked_self(vertex_buffer, texture) {
 }
 	
 
-/*######### draw stacked sprite ext #########\\
+/*######### draw stack sprite ext #########\\
 
-draws a stacked sprite model (ONLY USE IN DRAW EVENTS)
+draws a stack sprite model (ONLY USE IN DRAW EVENTS)
 
 important notes: 
 1. you will have to manually reset the world matrix after drawing. Look at o3Dtest for an example.
@@ -159,7 +159,7 @@ y_scale			--> scale to apply along y axis of model
 z_scale			--> scale to apply along z axis of model
 
 \\#######################################*/
-function draw_stacked_sprite_ext(vertex_buffer, texture, x, y, z, x_angle, y_angle, z_angle, x_scale, y_scale, z_scale) {
+function draw_stack_sprite_ext(vertex_buffer, texture, x, y, z, x_angle, y_angle, z_angle, x_scale, y_scale, z_scale) {
 	// builds a matrix that accounts for the passed-in position, angle(s), and scale
 	var inst_matrix = matrix_build( x, y, z, x_angle, y_angle, z_angle, x_scale, y_scale, z_scale);
 	
