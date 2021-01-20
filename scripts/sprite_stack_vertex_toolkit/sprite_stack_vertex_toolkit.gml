@@ -41,14 +41,22 @@ function load_stacked_sprite(sprite_index, layer_count, vertex_format, fidelity)
 	vertex_begin(vertex_buffer, vertex_format);
 
 	var layer_size = 1/layer_count;
+	var z_step = 1/fidelity;
 	
 	// width and height of any given layer
 	var w = sprite_get_width(sprite_index)/2;
 	var h = (sprite_get_height(sprite_index)/layer_count)/2;
 	
-	for (var i = 0; i < layer_count; i += 1/fidelity) {
+	for (var i = 0; i < layer_count; i += z_step) {
 		var texture_frame = floor(layer_count-i-1);
 		var z_scale = 1;
+		
+		// tilt the planes to enhance the 3d effect somewhat
+		var offsets = array_create(4, 0);
+		if fidelity >= 4 {
+			offsets[(i * fidelity mod 4)] = 1/2;
+			offsets[((i * fidelity + 2) mod 4)] = 1/2;
+		}
 		
 		// _____	construct 1st triangle
 		// \   |
@@ -60,7 +68,7 @@ function load_stacked_sprite(sprite_index, layer_count, vertex_format, fidelity)
 			each triangle is made up of 3 points, which each have a position,
 			color, and texcoord with the given format.
 		*/
-		vertex_position_3d(vertex_buffer, -w, -h, -i*z_scale);
+		vertex_position_3d(vertex_buffer, -w, -h, -i*z_scale + offsets[0]);
 		vertex_color(vertex_buffer, c_white, 1.0);
 		
 		/* 
@@ -70,11 +78,11 @@ function load_stacked_sprite(sprite_index, layer_count, vertex_format, fidelity)
 		*/
 		vertex_texcoord(vertex_buffer, uvs[0], uvs[1] + (uvs[3]-uvs[1])*texture_frame*layer_size);
 
-		vertex_position_3d(vertex_buffer, w, -h, -i*z_scale);
+		vertex_position_3d(vertex_buffer, w, -h, -i*z_scale + offsets[1]);
 		vertex_color(vertex_buffer, c_white, 1.0);
 		vertex_texcoord(vertex_buffer, uvs[2], uvs[1] + (uvs[3]-uvs[1])*texture_frame*layer_size);
 	
-		vertex_position_3d(vertex_buffer, w, h, -i*z_scale);
+		vertex_position_3d(vertex_buffer, w, h, -i*z_scale + offsets[2]);
 		vertex_color(vertex_buffer, c_white, 1.0);
 		vertex_texcoord(vertex_buffer, uvs[2], uvs[1] + (uvs[3]-uvs[1])*(texture_frame+1)*layer_size);
 		#endregion
@@ -85,15 +93,15 @@ function load_stacked_sprite(sprite_index, layer_count, vertex_format, fidelity)
 		// |___\
 
 		#region second triangle
-		vertex_position_3d(vertex_buffer, -w, -h, -i*z_scale);
+		vertex_position_3d(vertex_buffer, -w, -h, -i*z_scale + offsets[0]);
 		vertex_color(vertex_buffer, c_white, 1.0);
 		vertex_texcoord(vertex_buffer, uvs[0], uvs[1] + (uvs[3]-uvs[1])*texture_frame*layer_size);
 
-		vertex_position_3d(vertex_buffer, -w, h, -i*z_scale);
+		vertex_position_3d(vertex_buffer, -w, h, -i*z_scale + offsets[3]);
 		vertex_color(vertex_buffer, c_white, 1.0);
 		vertex_texcoord(vertex_buffer, uvs[0], uvs[1] + (uvs[3]-uvs[1])*(texture_frame+1)*layer_size);
 
-		vertex_position_3d(vertex_buffer, w, h, -i*z_scale);
+		vertex_position_3d(vertex_buffer, w, h, -i*z_scale + offsets[2]);
 		vertex_color(vertex_buffer, c_white, 1.0);
 		vertex_texcoord(vertex_buffer, uvs[2], uvs[1] + (uvs[3]-uvs[1])*(texture_frame+1)*layer_size);
 		#endregion

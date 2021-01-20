@@ -5,7 +5,9 @@ depth_grid = -1;
 shader_mode = 6;
 
 // lower values will increase performance, but can make the background appear through models
-stacking_fidelity = 6;
+
+// use values of 4 or less
+stacking_fidelity = 8;
 
 
 // FUNCTION FOR DEPTH SORTING

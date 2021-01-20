@@ -12,8 +12,8 @@ camera_angle = 0;
 
 // tilt from z axis, where a value of 0 would be directly top down.
 incline_angle = 45;
-incline_minimum = 30;
-incline_maximum = 65;
+incline_minimum = 15;
+incline_maximum = 75;
 
 
 camera_width  = default_camera_width ;
