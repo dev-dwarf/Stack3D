@@ -1,6 +1,7 @@
 {
   "resources": [
     {"id":{"name":"shdWobble","path":"shaders/shdWobble/shdWobble.yy",},"order":1,},
+    {"id":{"name":"sCube","path":"sprites/sCube/sCube.yy",},"order":8,},
     {"id":{"name":"oCamera","path":"objects/oCamera/oCamera.yy",},"order":4,},
     {"id":{"name":"o3Dtest","path":"objects/o3Dtest/o3Dtest.yy",},"order":2,},
     {"id":{"name":"oCoin","path":"objects/oCoin/oCoin.yy",},"order":7,},
@@ -22,6 +23,7 @@
     {"id":{"name":"shdWave","path":"shaders/shdWave/shdWave.yy",},"order":5,},
     {"id":{"name":"pDepth","path":"objects/pDepth/pDepth.yy",},"order":0,},
     {"id":{"name":"sCup1","path":"sprites/sCup1/sCup1.yy",},"order":0,},
+    {"id":{"name":"oCube","path":"objects/oCube/oCube.yy",},"order":9,},
     {"id":{"name":"Sprite5","path":"sprites/Sprite5/Sprite5.yy",},"order":4,},
     {"id":{"name":"oWheel","path":"objects/oWheel/oWheel.yy",},"order":8,},
     {"id":{"name":"oPlayer","path":"objects/oPlayer/oPlayer.yy",},"order":1,},

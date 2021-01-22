@@ -17,6 +17,11 @@ view_matrix = matrix_multiply(translation_matrix, view_matrix);
 // creates the projection matrix, and applies the zoom level to it.
 var proj_matrix = matrix_build_projection_ortho(256/camera_zoom, 144/camera_zoom, 1.0, 32000.0);
 
+// perspective camera leads to some funky things!
+//var proj_matrix = matrix_build_projection_perspective(256/camera_zoom, 144/camera_zoom, 1.0, 32000.0);
+//var proj_matrix = matrix_build_projection_perspective_fov(144/camera_zoom, 16/9, 1.0, 32000.0);
+
+
 camera_set_view_mat(camera, view_matrix);
 camera_set_proj_mat(camera, proj_matrix);
 camera_apply(camera);

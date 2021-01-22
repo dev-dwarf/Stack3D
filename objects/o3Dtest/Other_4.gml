@@ -5,8 +5,8 @@ repeat(1500) {
 		image_xscale = random_range(0.8, 1.2);
 		image_yscale = image_xscale;
 		image_zscale = image_xscale;
-		x_tilt = random_range(-90, 90);
-		y_tilt = random_range(-90, 90);
-		
+		x_tilt		= random_range(-90, 90);
+		y_tilt		= random_range(-90, 90);
+		//z			= irandom_range(80, 120);
 	}
 }

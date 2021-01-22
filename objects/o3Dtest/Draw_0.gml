@@ -31,12 +31,8 @@ switch shader_mode {
 }
 
 
-for (var i = 0; i < ds_grid_height(depth_grid); i++) {
-	var inst = depth_grid[# 0, i];
-
-	with inst {
-		event_perform(ev_draw, 0);
-	}
+with pDepth {
+	event_perform(ev_draw, 0);
 }
 
 // IMPORTANT! reset world matrix and shader for other drawing

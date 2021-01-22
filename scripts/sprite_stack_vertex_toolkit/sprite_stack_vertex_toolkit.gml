@@ -129,7 +129,7 @@ texture			--> the texture to apply to the model
 \\#######################################*/
 function draw_stack_self(vertex_buffer, texture) {
 	// builds a matrix that accounts for the objects position, angle(s), and scale
-	var inst_matrix = matrix_build( x, y, z, x_tilt, y_tilt, image_angle, image_xscale, image_yscale, image_zscale);
+	var inst_matrix = matrix_build( x, y, -z, x_tilt, y_tilt, image_angle, image_xscale, image_yscale, image_zscale);
 	
 	// sets the world matrix to this matrix
 	matrix_set(matrix_world, inst_matrix);
