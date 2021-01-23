@@ -34,5 +34,4 @@ var tilt_matrix = matrix_build(0, 0, 0, -90, 0, -camera_angle, 1.0, 1.0, 1.0);
 
 // for spherical billboarding uncomment
 //var tilt_matrix = matrix_build(0, 0, 0, -incline_angle, 0, -camera_angle, 1.0, 1.0, 1.0);
-
 billboard_matrix = tilt_matrix;

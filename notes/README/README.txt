@@ -31,12 +31,15 @@ Cons:
 	Discards camera system. Due to the 3d functions being used, default camera functions no longer work.
 	No depth occlusion
 	
-In order to use the system in your own projects, copy over the sprite_stack_vertex_toolkit script. Then you can
-build your own system to do depth sorting and handle loading different models, or use a modified version of mine.
+#########################################################################
+							SETUP
+#########################################################################
+In order to use the system in your own projects, copy over the sprite_stack_vertex_toolkit script, and the oCamera object. You will also need
+a system to handle loading the vertex buffers into memory. An example system is in o3Dtest and pDepth.
 
 There are also a few shaders as examples of how you could achieve certain effects.
 
-## IMPORTANT: YOU WILL NEED TO CHANGE THE SETTINGS OF THE TEXTURE GROUPS!
+## IMPORTANT: YOU WILL ALSO NEED TO CHANGE THE SETTINGS OF THE TEXTURE GROUPS!
 
 go to tools > texture groups and disable automatic crop. If you have large models, you may also need
 to increase the size of your texture pages.
@@ -52,7 +55,3 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-#########################################################################
-								TODO
-#########################################################################

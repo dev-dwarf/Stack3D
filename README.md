@@ -1,7 +1,7 @@
 # Stack3D
 The fastest method of Sprite Stacking in Gamemaker!
 
-## As a benchmark, using this technique I can have 3000 sprite stacked models drawing at once at 60 fps. Using normal sprite stacking I can have about 200 at 60 fps.
+(As a benchmark, using this technique I can have 1500 sprite stacked models drawing at once at 60 fps. Using normal sprite stacking I can have about 200 at 60 fps.)
 
 # INTRO
 Hello! This is a message from me, dev_dwarf, who created this example project.
@@ -31,10 +31,16 @@ Cons:
 	Discards camera system. Due to the 3d functions being used, default camera functions no longer work.
 	No depth occlusion.
 	
-In order to use the system in your own projects, copy over the sprite_stack_vertex_toolkit script. Then you can
-build your own system to do depth sorting and handle loading different models, or use a modified version of mine.
+# SETUP
+In order to use the system in your own projects, copy over the sprite_stack_vertex_toolkit script, and the oCamera object. You will also need
+a system to handle loading the vertex buffers into memory. An example system is in o3Dtest and pDepth.
 
 There are also a few shaders as examples of how you could achieve certain effects.
+
+# IMPORTANT: YOU WILL ALSO NEED TO CHANGE THE SETTINGS OF THE TEXTURE GROUPS!
+
+go to tools > texture groups and disable automatic crop. If you have large models, you may also need
+to increase the size of your texture pages.
 
 ## Feel free to send a pull request if there are things you would like to be changed, or features you would like to add!
 
