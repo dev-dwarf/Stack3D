@@ -41,5 +41,5 @@ projected_mouse_y  = 0;
 #region demo stuff
 click_x = 0;
 click_y = 0;
-sensitivity = 0.01;
+sensitivity = 0.1;
 #endregion

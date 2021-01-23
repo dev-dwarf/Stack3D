@@ -378,3 +378,34 @@
 	}
 	
 #endregion
+#region -------------------------- Lighting functions
+	
+function set_light(from, to, up) {
+		with (o3Dtest)
+		{
+			lightPosition[X] = from[X];
+			lightPosition[Y] = from[Y];
+			lightPosition[Z] = from[Z];
+			lightForward[X]  = to[X] - from[X]
+			lightForward[Y]  = to[Y] - from[Y];
+			lightForward[Z]  = to[Z] - from[Z];
+			lightUp[X]       = up[X];
+			lightUp[Y]       = up[Y];
+			lightUp[Z]       = up[Z];
+
+			normalize(lightForward);
+			cross_product(lightForward, lightUp, lightRight);
+
+			normalize(lightRight);
+			cross_product(lightRight, lightForward, lightUp);
+	
+			lightViewMat = matrix_build_lookat(
+				from[X], from[Y], from[Z],
+				to[X],   to[Y],   to[Z],
+				up[X],   up[Y],   up[Z]);
+			lightProjMat = matrix_build_projection_ortho(
+				-LIGHT_SIZE, LIGHT_SIZE, 0, LIGHT_LENGTH);
+		}
+	}
+
+#endregion
