@@ -8,7 +8,6 @@ shader_mode = 6;
 // use values of 4 or less
 stacking_fidelity = 16;
 
-
 // FUNCTION FOR DEPTH SORTING
 function compute_3d_depth() {
 

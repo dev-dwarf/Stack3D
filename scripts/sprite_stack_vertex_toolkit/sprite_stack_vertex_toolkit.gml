@@ -259,3 +259,21 @@ function draw_normal_ext(sprite_index, image_index, x, y, z, x_tilt, y_tilt, ang
 	
 	draw_sprite_ext(sprite_index, image_index, 0, 0, image_xscale, image_yscale, 0, image_blend, image_alpha);
 }
+
+/*######### get_projected_mouse_x #########\\
+
+Gets the projected x position of the mouse in 3d space. This value is calculated in oCamera's Draw Begin Event
+
+\\#######################################*/
+function get_projected_mouse_x() {
+	return oCamera.projected_mouse_x;
+}
+
+/*######### get_projected_mouse_y #########\\
+
+Gets the projected y position of the mouse in 3d space. This value is calculated in oCamera's Draw Begin Event
+
+\\#######################################*/
+function get_projected_mouse_y() {
+	return oCamera.projected_mouse_y;
+}

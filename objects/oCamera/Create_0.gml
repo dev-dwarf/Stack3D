@@ -8,6 +8,7 @@ camera_zoom  = 1; // zoom level
 
 // recommend tweaking this
 z_distance = 1000;
+z = 0;
 
 // set up gpu
 gpu_set_ztestenable(true);
@@ -32,3 +33,13 @@ camera = view_camera[0];
 
 // ENSURE PIXEL PERFECT
 surface_resize(application_surface, camera_width*2, camera_height*2);
+
+// define custom mouse_x  and mouse_y
+projected_mouse_x  = 0;
+projected_mouse_y  = 0;
+
+#region demo stuff
+click_x = 0;
+click_y = 0;
+sensitivity = 0.01;
+#endregion
