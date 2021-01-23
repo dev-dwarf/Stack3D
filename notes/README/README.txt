@@ -39,7 +39,7 @@ There are also a few shaders as examples of how you could achieve certain effect
 ## IMPORTANT: YOU WILL NEED TO CHANGE THE SETTINGS OF THE TEXTURE GROUPS!
 
 go to tools > texture groups and disable automatic crop. If you have large models, you may also need
-to increase the size of your texture pages
+to increase the size of your texture pages.
 	
 #########################################################################
 							MIT LICENSE

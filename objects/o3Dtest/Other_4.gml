@@ -7,6 +7,6 @@ repeat(1500) {
 		image_zscale = image_xscale;
 		x_tilt		= random_range(-90, 90);
 		y_tilt		= random_range(-90, 90);
-		//z			= irandom_range(80, 120);
+		z			= irandom_range(80, 120);
 	}
 }

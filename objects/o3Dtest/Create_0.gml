@@ -1,6 +1,5 @@
 /// @description init and load 3d models
 show_debug_overlay(true);
-depth_grid = -1;
 
 shader_mode = 6;
 

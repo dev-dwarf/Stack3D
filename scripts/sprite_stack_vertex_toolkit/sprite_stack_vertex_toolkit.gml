@@ -161,7 +161,7 @@ z_scale			--> scale to apply along z axis of model
 \\#######################################*/
 function draw_stack_sprite_ext(vertex_buffer, texture, x, y, z, x_angle, y_angle, z_angle, x_scale, y_scale, z_scale) {
 	// builds a matrix that accounts for the passed-in position, angle(s), and scale
-	var inst_matrix = matrix_build( x, y, z, x_angle, y_angle, z_angle, x_scale, y_scale, z_scale);
+	var inst_matrix = matrix_build( x, y, -z, x_angle, y_angle, z_angle, x_scale, y_scale, z_scale);
 	
 	// sets the world matrix to this matrix
 	matrix_set(matrix_world, inst_matrix);
@@ -178,11 +178,11 @@ important notes:
 1. you will have to manually reset the world matrix after drawing. Look at o3Dtest for an example.
 \\#######################################*/
 function draw_billboard_self() {
-	var inst_matrix = matrix_build( x, y, z, x_tilt, y_tilt, 0, image_xscale, image_yscale, image_zscale);
+	var inst_matrix = matrix_build( x, y, -z, x_tilt, y_tilt, 0, 1.0, 1.0, image_zscale);
 	
 	matrix_set(matrix_world, matrix_multiply(oCamera.billboard_matrix, inst_matrix));
 	
-	draw_sprite_ext(sprite_index, image_index, 0, 0, 1.0, 1.0, 0, image_blend, image_alpha);
+	draw_sprite_ext(sprite_index, image_index, 0, 0, image_xscale, image_yscale, 0, image_blend, image_alpha);
 }
 
 /*######### draw billboard ext #########\\
@@ -207,9 +207,55 @@ image_blend		--> image_blend of the sprite
 image_alpha		--> image_alpha of the sprite
 \\#######################################*/
 function draw_billboard_ext(sprite_index, image_index, x, y, z, x_tilt, y_tilt, angle, image_xscale, image_yscale, image_zscale, image_blend, image_alpha) {
-	var inst_matrix = matrix_build( x, y, z, x_tilt, y_tilt, 0, image_xscale, image_yscale, image_zscale);
+	var inst_matrix = matrix_build( x, y, -z, x_tilt, y_tilt, 0, 1.0, 1.0, image_zscale);
 	
 	matrix_set(matrix_world, matrix_multiply(oCamera.billboard_matrix, inst_matrix));
 	
-	draw_sprite_ext(sprite_index, image_index, 0, 0, 1.0, 1.0, 0, image_blend, image_alpha);
+	draw_sprite_ext(sprite_index, image_index, 0, 0, image_xscale, image_yscale, 0, image_blend, image_alpha);
+}
+
+/*######### draw normal self #########\\
+
+draws a "normal" sprite
+
+important notes: 
+1. you will have to manually reset the world matrix after drawing. Look at o3Dtest for an example.
+\\#######################################*/
+function draw_normal_self() {
+	var inst_matrix = matrix_build( x, y, -z, x_tilt, y_tilt, 0, 1.0, 1.0, image_zscale);
+		
+	matrix_set(matrix_world, matrix_multiply(oCamera.normal_matrix, inst_matrix));
+	
+	draw_sprite_ext(sprite_index, image_index, 0, 0, image_xscale, image_yscale, 0, image_blend, image_alpha);
+}
+
+
+
+/*######### draw normal ext #########\\
+
+draws a "normal" sprite
+
+important notes: 
+1. you will have to manually reset the world matrix after drawing. Look at o3Dtest for an example.
+
+sprite_index	--> sprite to use
+image_index		--> image to use
+x				--> x coord to draw at
+y				--> y coord to draw at
+z				--> z coord to draw at
+x_tilt			--> x angle to tilt the model
+y_tilt			--> y angle to tilt the model
+angle			--> z angle (used in a similar way to image_angle in 2d games)
+image_xscale	--> scale to apply along x axis of model
+image_yscale	--> scale to apply along y axis of model
+image_zscale	--> scale to apply along z axis of model
+image_blend		--> image_blend of the sprite
+image_alpha		--> image_alpha of the sprite
+\\#######################################*/
+function draw_normal_ext(sprite_index, image_index, x, y, z, x_tilt, y_tilt, angle, image_xscale, image_yscale, image_zscale, image_blend, image_alpha) {
+	var inst_matrix = matrix_build( x, y, -z, x_tilt, y_tilt, 0, 1.0, 1.0, image_zscale);
+	
+	matrix_set(matrix_world, matrix_multiply(oCamera.normal_matrix, inst_matrix));
+	
+	draw_sprite_ext(sprite_index, image_index, 0, 0, image_xscale, image_yscale, 0, image_blend, image_alpha);
 }
