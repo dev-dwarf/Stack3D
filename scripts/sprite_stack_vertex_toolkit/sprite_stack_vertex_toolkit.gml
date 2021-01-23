@@ -224,7 +224,7 @@ important notes:
 function draw_normal_self() {
 	var inst_matrix = matrix_build( x, y, -z, x_tilt, y_tilt, 0, 1.0, 1.0, image_zscale);
 		
-	matrix_set(matrix_world, matrix_multiply(oCamera.normal_matrix, inst_matrix));
+	matrix_set(matrix_world, inst_matrix);
 	
 	draw_sprite_ext(sprite_index, image_index, 0, 0, image_xscale, image_yscale, 0, image_blend, image_alpha);
 }
@@ -255,7 +255,7 @@ image_alpha		--> image_alpha of the sprite
 function draw_normal_ext(sprite_index, image_index, x, y, z, x_tilt, y_tilt, angle, image_xscale, image_yscale, image_zscale, image_blend, image_alpha) {
 	var inst_matrix = matrix_build( x, y, -z, x_tilt, y_tilt, 0, 1.0, 1.0, image_zscale);
 	
-	matrix_set(matrix_world, matrix_multiply(oCamera.normal_matrix, inst_matrix));
+	matrix_set(matrix_world, inst_matrix);
 	
 	draw_sprite_ext(sprite_index, image_index, 0, 0, image_xscale, image_yscale, 0, image_blend, image_alpha);
 }
