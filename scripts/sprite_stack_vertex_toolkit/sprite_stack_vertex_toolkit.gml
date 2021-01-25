@@ -400,7 +400,7 @@
 		matrix_set(matrix_world, inst_matrix);
 		vertex_submit(vertex_buffer, pr_trianglelist, texture);
 	}
-	function draw_stack_sprite_ext(vertex_buffer, texture, x, y, z, x_angle, y_angle, z_angle, x_scale, y_scale, z_scale) {
+	function draw_stack_ext(vertex_buffer, texture, x, y, z, x_angle, y_angle, z_angle, x_scale, y_scale, z_scale) {
 		#region About
 	
 			/*		draw stack sprite ext
