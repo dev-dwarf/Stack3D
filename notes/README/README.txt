@@ -9,41 +9,7 @@ shout out, or even for you to just send me what you've done with it!
 
 If you need help, or want to suggest changes, please reach out on twitter (@dev_dwarf) or discord (https://discord.gg/5URwf82)
 
-#########################################################################
-						HOW THIS WORKS
-#########################################################################
-
-This is a system to replace the naive sprite stacking technique with actual 3D.
-
-It works by loading in a voxel model as a vertex buffer, and then drawing it. Hopefully you won't have to 
-understand much of this to work with the system.
-
-Each 3d model you want to draw will need to be loaded using **load_stack_sprite**. This will return a vertex buffer,
-which you should probably freeze using vertex_freeze to increase performance. Then in the draw event you will use vertex_submit
-to draw the model. You will find attached examples of all of this in o3Dtest.
-
-Pros:
-	Incredible performance over normal sprite stacking.
-	Rotation in all axis.
-	Simplified workflow, due to being able to directly import models from MagicaVoxel (use o slice).
-	
-Cons:
-	Discards camera system. Due to the 3d functions being used, default camera functions no longer work.
-	No depth occlusion
-	
-#########################################################################
-							SETUP
-#########################################################################
-In order to use the system in your own projects, copy over the sprite_stack_vertex_toolkit script, and the oCamera object. You will also need
-a system to handle loading the vertex buffers into memory. An example system is in o3Dtest and pDepth.
-
-There are also a few shaders as examples of how you could achieve certain effects.
-
-## IMPORTANT: YOU WILL ALSO NEED TO CHANGE THE SETTINGS OF THE TEXTURE GROUPS!
-
-go to tools > texture groups and disable automatic crop. If you have large models, you may also need
-to increase the size of your texture pages.
-	
+You can read an up to date guide on using the system here: https://dev-dwarf.github.io/dwarfdev/tutorials/2021/01/24/Stack3D-Guide.html
 #########################################################################
 							MIT LICENSE
 #########################################################################
