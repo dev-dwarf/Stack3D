@@ -173,21 +173,33 @@
 	}
 
 	// Functions that actually create vertex buffers
-	function load_stack_sprite(sprite_index, layer_count, vertex_format, fidelity) {
+	function load_stack_sprite() {
 		#region About
 		
 			/*			load_stack_sprite
 
 			loads a sprite stack model into memory
 
-			sprite_index	--> sprite to use, (assumed to be just 1 image, no subimages)
-			sprite_texture  --> texture of the sprite index. you will need this later to draw the model, 
+			@param _sprite_index	--> sprite to use, (assumed to be just 1 image, no subimages)
+			@param sprite_texture  --> texture of the sprite index. you will need this later to draw the model, 
 								so it's better to fetch outside this function
-			layer_count		--> the number of z-layers in the model
-			vertex_format	--> previously made vertex format
-			fidelity		--> the amount of repeated layers to create. (improves appearance of scaling and rotation)
+			@param layer_count		--> the number of z-layers in the model
+			@param vertex_format	--> previously made vertex format
+			@param fidelity		--> the amount of repeated layers to create. (improves appearance of scaling and rotation)
 		
+			@param [optional] origin_x
+			@param [optional] origin_y
+			@param [optional] origin_z
 			*/
+		
+		#endregion
+		
+		#region set parameters
+		var _sprite_index = argument[0],
+			layer_count = argument[1],
+			vertex_format = argument[2],
+			fidelity = argument[3];
+			
 		
 		#endregion
 	
@@ -195,7 +207,7 @@
 		var vertex_buffer = vertex_create_buffer();
 	
 		// get the texture and its UVs, so that we can build the model
-		var uvs = sprite_get_uvs(sprite_index, 0);
+		var uvs = sprite_get_uvs(_sprite_index, 0);
 	
 		show_debug_message(string(uvs));
 
@@ -206,8 +218,18 @@
 		var z_step = 1/fidelity;
 	
 		// width and height of any given layer
-		var w = sprite_get_width(sprite_index)/2;
-		var h = (sprite_get_height(sprite_index)/layer_count)/2;
+		var w = sprite_get_width(_sprite_index)/2;
+		var h = (sprite_get_height(_sprite_index)/layer_count)/2;
+		
+		var xx = 0,yy = 0;
+		if (argument_count > 4) {
+			xx = argument[4] + w;
+			yy = argument[5] + h;
+		}
+		var zz = 0;
+		if (argument_count > 6) {
+			zz = argument[6];	
+		}
 	
 		for (var i = 0; i < layer_count; i += z_step) {
 			var texture_frame = floor(layer_count-i-1);
@@ -243,35 +265,15 @@
 			#endregion
 		
 			vertex_quad_color(vertex_buffer, c_white, 1.0, 
-				[-w, -h, -i*z_scale + offsets[0]],
-				[-w, h, -i*z_scale + offsets[3]],
-				[w, -h, -i*z_scale + offsets[1]],
-				[w, h, -i*z_scale + offsets[2]],
+				[-w+xx, -h+yy, -i*z_scale + offsets[0] + zz],
+				[-w+xx,  h+yy, -i*z_scale + offsets[3] + zz],
+				[ w+xx, -h+yy, -i*z_scale + offsets[1] + zz],
+				[ w+xx,  h+yy, -i*z_scale + offsets[2] + zz],
 				[uvs[0], uvs[1] + (uvs[3]-uvs[1])*texture_frame*layer_size],
 				[uvs[0], uvs[1] + (uvs[3]-uvs[1])*(texture_frame+1)*layer_size],
 				[uvs[2], uvs[1] + (uvs[3]-uvs[1])*texture_frame*layer_size],
 				[uvs[2], uvs[1] + (uvs[3]-uvs[1])*(texture_frame+1)*layer_size]	
 			);
-			// First triangle
-			//vertex_triangle_color(vertex_buffer, c_white, 1.0,
-			//	[-w, -h, -i*z_scale + offsets[0]],
-			//	[w, -h, -i*z_scale + offsets[1]],
-			//	[w, h, -i*z_scale + offsets[2]],
-			//	[uvs[0], uvs[1] + (uvs[3]-uvs[1])*texture_frame*layer_size],
-			//	[uvs[2], uvs[1] + (uvs[3]-uvs[1])*texture_frame*layer_size],
-			//	[uvs[2], uvs[1] + (uvs[3]-uvs[1])*(texture_frame+1)*layer_size]
-			//);
-		
-			//// Second triangle
-			//vertex_triangle_color(vertex_buffer, c_white, 1.0,
-			//	[-w, -h, -i*z_scale + offsets[0]],
-			//	[-w, h, -i*z_scale + offsets[3]],
-			//	[w, h, -i*z_scale + offsets[2]],
-			//	[uvs[0], uvs[1] + (uvs[3]-uvs[1])*texture_frame*layer_size],
-			//	[uvs[0], uvs[1] + (uvs[3]-uvs[1])*(texture_frame+1)*layer_size],
-			//	[uvs[2], uvs[1] + (uvs[3]-uvs[1])*(texture_frame+1)*layer_size]
-			//);
-		
 		}
 
 		// end construction of the model
