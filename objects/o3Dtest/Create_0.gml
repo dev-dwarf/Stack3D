@@ -5,24 +5,9 @@ shader_mode = 6;
 
 // lower values will increase performance, but can make the background appear through models
 
-// use values of 4 or less
-stacking_fidelity = 16;
-
-// FUNCTION FOR DEPTH SORTING
-//function compute_3d_depth() {
-
-//	var _x				= argument[0];
-//	var _y				= argument[1];
-//	var _z				= argument[2];
-
-//	var _depth = _x * dcos(90 + oCamera.camera_angle) +
-//				 _y * dsin(90 + oCamera.camera_angle) +
-//				 _z;
-
-//	return -1 * _depth;
-
-
-//}
+// values equal or higher than 4 will use z-tilting when building the models,
+// which can fill in gaps between the vertices
+stacking_fidelity = 8;
 
 // CREATE A FORMAT AND RETRIEVE THE TEXTURE FOR THE SPRITE STACKING TO USE
 format = create_vertex_format();
@@ -57,44 +42,4 @@ distort_intensity	= shader_get_uniform(shdDistort, "intensity");
 wave_time			= shader_get_uniform(shdWave, "time");
 wave_intensity		= shader_get_uniform(shdWave, "intensity");
 
-#endregion
-#region Shadow Mapping
-	
-	#macro LIGHT_SIZE 1024
-	#macro LIGHT_LENGTH 640
-	lightForward  = array_create(3);
-	lightRight    = array_create(3);
-	lightUp       = array_create(3);
-	lightPosition = array_create(3);
-	lightViewMat  = matrix_build_identity();
-	lightProjMat  = matrix_build_identity();
-
-	surfShadowMap = -1;
-
-	smap_LightForward  = shader_get_uniform(
-		shd_shadow_mapping, "u_LightForward");
-	smap_LightPosition = shader_get_uniform(
-		shd_shadow_mapping, "u_LightPosition");
-	smap_LightLenght   = shader_get_uniform(
-		shd_shadow_mapping, "u_LightLenght");
-
-	dirl_LightForward = shader_get_uniform(
-		shd_directional_lighting, "u_LightForward");
-	dirl_LightRight = shader_get_uniform(
-		shd_directional_lighting, "u_LightRight");
-	dirl_LightUp = shader_get_uniform(
-		shd_directional_lighting, "u_LightUp");
-	dirl_LightPosition = shader_get_uniform(
-		shd_directional_lighting, "u_LightPosition");
-	dirl_LightSize = shader_get_uniform(
-		shd_directional_lighting, "u_LightSize");
-	dirl_LightLenght = shader_get_uniform(
-		shd_directional_lighting, "u_LightLenght");
-	dirl_ShadowMap = shader_get_sampler_index(
-		shd_directional_lighting, "u_ShadowMap");
-
-	lightHor  = 30;
-	lightVer  = -40;
-	lightDist = LIGHT_LENGTH * 0.5;
-	
 #endregion

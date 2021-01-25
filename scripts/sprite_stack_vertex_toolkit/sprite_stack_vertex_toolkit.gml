@@ -62,7 +62,6 @@
 		vertex_format_begin();
 	
 		vertex_format_add_position_3d();	// Add 3D position info
-		vertex_format_add_normal();			// Add normal info
 		vertex_format_add_color();			// Color info
 		vertex_format_add_texcoord();		// Texture coordinate info
 	
@@ -87,23 +86,15 @@
 			*/
 			
 		#endregion
-		
-		var normal = array_create(3),
-		p12    = [p2[X]-p1[X], p2[Y]-p1[Y], p2[Z]-p1[Z]],
-		p13    = [p3[X]-p1[X], p3[Y]-p1[Y], p3[Z]-p1[Z]];
-		cross_product(p13, p12, normal);
-		normalize(normal);
-
 		vertex_position_3d(_vBuff, p1[X],     p1[Y],     p1[Z]);
-		vertex_normal(     _vBuff, normal[X], normal[Y], normal[Z]);
 		vertex_color(      _vBuff, _color,     _alpha);
 		vertex_texcoord(   _vBuff, tex1[U],         tex1[V]);
+		
 		vertex_position_3d(_vBuff, p2[X],     p2[Y],     p2[Z]);
-		vertex_normal(     _vBuff, normal[X], normal[Y], normal[Z]);
 		vertex_color(      _vBuff, _color,     _alpha);
 		vertex_texcoord(   _vBuff, tex2[U],         tex2[V]);
+		
 		vertex_position_3d(_vBuff, p3[X],     p3[Y],     p3[Z]);
-		vertex_normal(     _vBuff, normal[X], normal[Y], normal[Z]);
 		vertex_color(      _vBuff, _color,     _alpha);
 		vertex_texcoord(   _vBuff, tex3[U],         tex3[V]);
 		}
@@ -377,35 +368,4 @@
 		return oCamera.projected_mouse_y;
 	}
 	
-#endregion
-#region -------------------------- Lighting functions
-	
-function set_light(from, to, up) {
-		with (o3Dtest)
-		{
-			lightPosition[X] = from[X];
-			lightPosition[Y] = from[Y];
-			lightPosition[Z] = from[Z];
-			lightForward[X]  = to[X] - from[X]
-			lightForward[Y]  = to[Y] - from[Y];
-			lightForward[Z]  = to[Z] - from[Z];
-			lightUp[X]       = up[X];
-			lightUp[Y]       = up[Y];
-			lightUp[Z]       = up[Z];
-
-			normalize(lightForward);
-			cross_product(lightForward, lightUp, lightRight);
-
-			normalize(lightRight);
-			cross_product(lightRight, lightForward, lightUp);
-	
-			lightViewMat = matrix_build_lookat(
-				from[X], from[Y], from[Z],
-				to[X],   to[Y],   to[Z],
-				up[X],   up[Y],   up[Z]);
-			lightProjMat = matrix_build_projection_ortho(
-				-LIGHT_SIZE, LIGHT_SIZE, 0, LIGHT_LENGTH);
-		}
-	}
-
 #endregion
