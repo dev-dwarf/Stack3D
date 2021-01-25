@@ -15,19 +15,6 @@ format = create_vertex_format();
 textures = ds_map_create();
 buffers = ds_map_create();
 
-function load_sprite(sprite_index, layer_count) {
-	if (is_undefined(buffers[? sprite_index])) {
-		textures[? sprite_index] = sprite_get_texture(sprite_index, 0);
-
-		// USE THE FUNCTIONS TO LOAD THE MODEL
-		buffers[? sprite_index] = load_stack_sprite(sprite_index, layer_count, format, stacking_fidelity);
-
-		// FREEZE THE MODEL (optional)
-		vertex_freeze(buffers[? sprite_index]); // makes the buffer read only, but increases performance significantly.
-	}
-}
-
-
 #region shader uniforms
 wobble_time			= shader_get_uniform(shdWobble, "time");
 wobble_intensity	= shader_get_uniform(shdWobble, "intensity");

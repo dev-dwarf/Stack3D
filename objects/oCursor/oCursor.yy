@@ -29,8 +29,8 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Objects",
-    "path": "folders/Objects.yy",
+    "name": "example objects",
+    "path": "folders/Objects/example objects.yy",
   },
   "resourceVersion": "1.0",
   "name": "oCursor",

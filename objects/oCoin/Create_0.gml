@@ -1,4 +1,4 @@
-/// @description
+/// @description load 3d model
 
 // Inherit the parent event
 event_inherited();

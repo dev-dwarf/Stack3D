@@ -68,7 +68,7 @@
 		// Return the format
 		return vertex_format_end();
 	}
-	function vertex_triangle_color(_vBuff, _color, _alpha, p1, p2, p3, tex1, tex2, tex3) {
+	function vertex_triangle_color(_vertex_buffer, _color, _alpha, p1, p2, p3, tex1, tex2, tex3) {
 		#region About
 			///@param vertex_buffer
 			///@param color
@@ -86,22 +86,93 @@
 			*/
 			
 		#endregion
-		vertex_position_3d(_vBuff, p1[X],     p1[Y],     p1[Z]);
-		vertex_color(      _vBuff, _color,     _alpha);
-		vertex_texcoord(   _vBuff, tex1[U],         tex1[V]);
+		vertex_position_3d(_vertex_buffer, p1[X],     p1[Y],     p1[Z]);
+		vertex_color(      _vertex_buffer, _color,     _alpha);
+		vertex_texcoord(   _vertex_buffer, tex1[U],         tex1[V]);
 		
-		vertex_position_3d(_vBuff, p2[X],     p2[Y],     p2[Z]);
-		vertex_color(      _vBuff, _color,     _alpha);
-		vertex_texcoord(   _vBuff, tex2[U],         tex2[V]);
+		vertex_position_3d(_vertex_buffer, p2[X],     p2[Y],     p2[Z]);
+		vertex_color(      _vertex_buffer, _color,     _alpha);
+		vertex_texcoord(   _vertex_buffer, tex2[U],         tex2[V]);
 		
-		vertex_position_3d(_vBuff, p3[X],     p3[Y],     p3[Z]);
-		vertex_color(      _vBuff, _color,     _alpha);
-		vertex_texcoord(   _vBuff, tex3[U],         tex3[V]);
+		vertex_position_3d(_vertex_buffer, p3[X],     p3[Y],     p3[Z]);
+		vertex_color(      _vertex_buffer, _color,     _alpha);
+		vertex_texcoord(   _vertex_buffer, tex3[U],         tex3[V]);
 		}
-
+	function vertex_quad_color(_vertex_buffer, _color, _alpha, p1, p2, p3, p4, tex1, tex2, tex3, tex4) {
+		vertex_triangle_color(_vertex_buffer, _color, _alpha, p1, p2, p4, tex1, tex2, tex4);
+		vertex_triangle_color(_vertex_buffer, _color, _alpha, p1, p3, p4, tex1, tex3, tex4);
+	}
 #endregion
-#region -------------------------- Draw functions
+#region -------------------------- Model Loading functions
+	// For use by Manager object
+	function load_sprite() {
+		#region About
+			///@param sprite_index
+			///@param layer_count
+			///@param [optional] fidelity
+			
+			/*
+				This function loads a sprite stack model into memory, and stores its texture.
+				
+				This function is meant to be called my o3Dtest, since it requires that the
+				ds_maps named buffers and textures already exist, and for stacking fidelity to be defined.
+				
+				However, these could instead be defined in whatever object you call this from.
+			*/
+			
+		#endregion
+		
+		#region set parameters
+		var _sprite_index = argument[0], 
+		layer_count = argument[1], 
+		fidelity = stacking_fidelity;
+		if (argument_count > 2) fidelity = argument[2];
+		#endregion
+		
+		if (is_undefined(buffers[? _sprite_index])) {
+			textures[? _sprite_index] = sprite_get_texture(_sprite_index, 0);
 
+			// USE THE FUNCTIONS TO LOAD THE MODEL
+			buffers[? _sprite_index] = load_stack_sprite(_sprite_index, layer_count, format, stacking_fidelity);
+
+			// FREEZE THE MODEL (optional)
+			vertex_freeze(buffers[? _sprite_index]); // makes the buffer read only, but increases performance significantly.
+		}
+	}	
+	function load_other() {
+		#region About
+			///@param sprite_index
+			///@param vertex_buffer
+			
+			/*
+				This function loads a misc model into memory. (this is useful for when you want to
+				include normal 3d models with your sprite stacking).
+				
+				This function is meant to be called by o3Dtest, since it requires that the
+				ds_maps named buffers and textures already exist.
+				
+				However, these could instead be defined in whatever object you call this from.
+			*/
+			
+		#endregion
+		
+		#region set parameters
+		var _sprite_index = argument[0], 
+		vertex_buffer = argument[1];
+		#endregion
+		
+		if (is_undefined(buffers[? _sprite_index])) {
+			textures[? _sprite_index] = sprite_get_texture(_sprite_index, 0);
+
+			// USE THE FUNCTIONS TO LOAD THE MODEL
+			buffers[? _sprite_index] = vertex_buffer;
+
+			// FREEZE THE MODEL (optional)
+			vertex_freeze(buffers[? _sprite_index]); // makes the buffer read only, but increases performance significantly.
+		}	
+	}
+
+	// Functions that actually create vertex buffers
 	function load_stack_sprite(sprite_index, layer_count, vertex_format, fidelity) {
 		#region About
 		
@@ -171,25 +242,35 @@
 				*/
 			#endregion
 		
-			// First triangle
-			vertex_triangle_color(vertex_buffer, c_white, 1.0,
+			vertex_quad_color(vertex_buffer, c_white, 1.0, 
 				[-w, -h, -i*z_scale + offsets[0]],
+				[-w, h, -i*z_scale + offsets[3]],
 				[w, -h, -i*z_scale + offsets[1]],
 				[w, h, -i*z_scale + offsets[2]],
 				[uvs[0], uvs[1] + (uvs[3]-uvs[1])*texture_frame*layer_size],
-				[uvs[2], uvs[1] + (uvs[3]-uvs[1])*texture_frame*layer_size],
-				[uvs[2], uvs[1] + (uvs[3]-uvs[1])*(texture_frame+1)*layer_size]
-			);
-		
-			// Second triangle
-			vertex_triangle_color(vertex_buffer, c_white, 1.0,
-				[-w, -h, -i*z_scale + offsets[0]],
-				[-w, h, -i*z_scale + offsets[3]],
-				[w, h, -i*z_scale + offsets[2]],
-				[uvs[0], uvs[1] + (uvs[3]-uvs[1])*texture_frame*layer_size],
 				[uvs[0], uvs[1] + (uvs[3]-uvs[1])*(texture_frame+1)*layer_size],
-				[uvs[2], uvs[1] + (uvs[3]-uvs[1])*(texture_frame+1)*layer_size]
+				[uvs[2], uvs[1] + (uvs[3]-uvs[1])*texture_frame*layer_size],
+				[uvs[2], uvs[1] + (uvs[3]-uvs[1])*(texture_frame+1)*layer_size]	
 			);
+			// First triangle
+			//vertex_triangle_color(vertex_buffer, c_white, 1.0,
+			//	[-w, -h, -i*z_scale + offsets[0]],
+			//	[w, -h, -i*z_scale + offsets[1]],
+			//	[w, h, -i*z_scale + offsets[2]],
+			//	[uvs[0], uvs[1] + (uvs[3]-uvs[1])*texture_frame*layer_size],
+			//	[uvs[2], uvs[1] + (uvs[3]-uvs[1])*texture_frame*layer_size],
+			//	[uvs[2], uvs[1] + (uvs[3]-uvs[1])*(texture_frame+1)*layer_size]
+			//);
+		
+			//// Second triangle
+			//vertex_triangle_color(vertex_buffer, c_white, 1.0,
+			//	[-w, -h, -i*z_scale + offsets[0]],
+			//	[-w, h, -i*z_scale + offsets[3]],
+			//	[w, h, -i*z_scale + offsets[2]],
+			//	[uvs[0], uvs[1] + (uvs[3]-uvs[1])*texture_frame*layer_size],
+			//	[uvs[0], uvs[1] + (uvs[3]-uvs[1])*(texture_frame+1)*layer_size],
+			//	[uvs[2], uvs[1] + (uvs[3]-uvs[1])*(texture_frame+1)*layer_size]
+			//);
 		
 		}
 
@@ -197,7 +278,106 @@
 		vertex_end(vertex_buffer);
 	
 		return vertex_buffer;
+	}		
+	function create_3d_wall(width, length, height, sprite_index, color, vertex_format) {
+		#region About
+		
+			/*			create_wall_color
+
+			creates a textured 3d wall with specified width, length and height, with centered origin.
+			See oCube for example usage.
+			
+			WIDTH____________L
+			|				|e
+			|				|n
+			|---------------|g
+			|_______________|t
+			|		| height|h
+			|		|		|
+			--------|--------
+			
+			To simplify things, this function assumes all horiontal sides of the wall use the same texture.
+			The texture should be laid out as a 1 frame, png image, with the wide sides of the textures connecting
+			to each other vertically.
+			
+			top texture _____
+			|				|
+			|____side texture
+			|				|
+			|				|
+			|				|
+			bottom texture _|
+			|				|
+			|_______________|
+			
+			Don't leave any gaps in the texture!
+			
+			width, length, height
+			sprite_index
+			color,
+			vertex_format
+			*/
+		
+		#endregion
+		
+		var texture = sprite_get_texture(sprite_index, 0);
+		var uvs = texture_get_uvs(texture);
+		var s_height = sprite_get_height(sprite_index);
+		
+		var vertex_buffer = vertex_create_buffer()
+		vertex_begin(vertex_buffer, vertex_format);
+		
+		var w = width/2, l = length/2, h = height;
+		
+		// bottom
+		vertex_quad_color(vertex_buffer, color, 1.0, 
+		[-w, -l, 0],
+		[ w, -l, 0],
+		[-w,  l, 0],
+		[ w,  l, 0],
+		[uvs[0], uvs[1]+(uvs[3]-uvs[1])*(length+height)/s_height],
+		[uvs[2], uvs[1]+(uvs[3]-uvs[1])*(length+height)/s_height],
+		[uvs[0], uvs[3]],
+		[uvs[2], uvs[3]]
+		);
+		
+		// sides
+		for (var i = 0; i < 4; i++) {
+			var s = dsin(i*90),
+				c = dcos(i*90);
+				//s2 = dsin((i+1)*90),
+				//c2 = dsin((i+1)*90);
+				
+			vertex_quad_color(vertex_buffer, color, 1.0,
+			[-w * c + w * s, l * c + -w * s, -h],
+			[ w * c + w * s, l * c +  w * s, -h],
+			[-w * c + w * s, l * c + -w * s,  0],
+			[ w * c + w * s, l * c +  w * s,  0],
+			[uvs[0], uvs[1]+(uvs[3]-uvs[1])*height/s_height],
+			[uvs[2], uvs[1]+(uvs[3]-uvs[1])*height/s_height],
+			[uvs[0], uvs[1]+(uvs[3]-uvs[1])*(length+height)/s_height],
+			[uvs[2], uvs[1]+(uvs[3]-uvs[1])*(length+height)/s_height],
+			);
+		}
+		
+		// top
+		vertex_quad_color(vertex_buffer, color, 1.0, 
+		[-w, -l, -h],
+		[ w, -l, -h],
+		[-w,  l, -h],
+		[ w,  l, -h],
+		[uvs[0], uvs[1]],
+		[uvs[2], uvs[1]],
+		[uvs[0], uvs[1]+(uvs[3]-uvs[1])*height/s_height],
+		[uvs[2], uvs[1]+(uvs[3]-uvs[1])*height/s_height]
+		);
+			
+		vertex_end(vertex_buffer)
+		return vertex_buffer;
 	}
+#endregion
+#region -------------------------- Draw functions
+
 	function draw_stack_self(vertex_buffer, texture) {
 		#region About
 		

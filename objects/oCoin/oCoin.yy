@@ -8,8 +8,8 @@
   "spriteMaskId": null,
   "persistent": false,
   "parentObjectId": {
-    "name": "pDepth",
-    "path": "objects/pDepth/pDepth.yy",
+    "name": "p3D",
+    "path": "objects/p3D/p3D.yy",
   },
   "physicsObject": false,
   "physicsSensor": false,
@@ -25,13 +25,12 @@
   "physicsShapePoints": [],
   "eventList": [
     {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"parent":{"name":"oCoin","path":"objects/oCoin/oCoin.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
-    {"isDnD":false,"eventNum":0,"eventType":8,"collisionObjectId":null,"parent":{"name":"oCoin","path":"objects/oCoin/oCoin.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
   ],
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Objects",
-    "path": "folders/Objects.yy",
+    "name": "example objects",
+    "path": "folders/Objects/example objects.yy",
   },
   "resourceVersion": "1.0",
   "name": "oCoin",

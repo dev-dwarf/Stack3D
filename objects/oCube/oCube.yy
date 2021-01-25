@@ -1,15 +1,15 @@
 {
   "spriteId": {
-    "name": "sCube",
-    "path": "sprites/sCube/sCube.yy",
+    "name": "sWall",
+    "path": "sprites/sWall/sWall.yy",
   },
   "solid": false,
   "visible": true,
   "spriteMaskId": null,
   "persistent": false,
   "parentObjectId": {
-    "name": "pDepth",
-    "path": "objects/pDepth/pDepth.yy",
+    "name": "p3D",
+    "path": "objects/p3D/p3D.yy",
   },
   "physicsObject": false,
   "physicsSensor": false,
@@ -25,14 +25,13 @@
   "physicsShapePoints": [],
   "eventList": [
     {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"parent":{"name":"oCube","path":"objects/oCube/oCube.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
-    {"isDnD":false,"eventNum":0,"eventType":8,"collisionObjectId":null,"parent":{"name":"oCube","path":"objects/oCube/oCube.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
     {"isDnD":false,"eventNum":0,"eventType":3,"collisionObjectId":null,"parent":{"name":"oCube","path":"objects/oCube/oCube.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
   ],
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Objects",
-    "path": "folders/Objects.yy",
+    "name": "example objects",
+    "path": "folders/Objects/example objects.yy",
   },
   "resourceVersion": "1.0",
   "name": "oCube",

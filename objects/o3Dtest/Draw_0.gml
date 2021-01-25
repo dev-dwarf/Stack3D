@@ -1,6 +1,7 @@
 /// @description draw 3d models
 
 // make sure you draw the models using a shader
+//   default is shdStack
 switch shader_mode {
 	default: case 0:
 	shader_set(shdStack);
@@ -35,7 +36,7 @@ with pDepth {
 	event_perform(ev_draw, 0);
 }
 	
-	shader_reset();
+shader_reset();
 
 // IMPORTANT! reset world matrix and shader for other drawing
 matrix_set(matrix_world, matrix_build_identity());

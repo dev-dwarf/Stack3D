@@ -31,8 +31,8 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Objects",
-    "path": "folders/Objects.yy",
+    "name": "important objects",
+    "path": "folders/Objects/important objects.yy",
   },
   "resourceVersion": "1.0",
   "name": "o3Dtest",

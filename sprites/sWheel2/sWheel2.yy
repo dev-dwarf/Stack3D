@@ -353,7 +353,7 @@
   ],
   "parent": {
     "name": "Sprites",
-    "path": "folders/Sprites.yy",
+    "path": "folders/Objects/example objects/Sprites.yy",
   },
   "resourceVersion": "1.0",
   "name": "sWheel2",

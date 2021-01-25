@@ -1,4 +1,4 @@
-/// @description
+/// @description draw 3d model
 var buffer	= o3Dtest.buffers[? sprite_index];
 var texture = o3Dtest.textures[? sprite_index];
 	
