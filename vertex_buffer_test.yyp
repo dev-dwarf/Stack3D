@@ -27,7 +27,7 @@
     {"id":{"name":"sCup1","path":"sprites/sCup1/sCup1.yy",},"order":0,},
     {"id":{"name":"oCube","path":"objects/oCube/oCube.yy",},"order":2,},
     {"id":{"name":"Sprite5","path":"sprites/Sprite5/Sprite5.yy",},"order":4,},
-    {"id":{"name":"oWheel","path":"objects/oWheel/oWheel.yy",},"order":6,},
+    {"id":{"name":"oLogo","path":"objects/oLogo/oLogo.yy",},"order":6,},
     {"id":{"name":"oPlayer","path":"objects/oPlayer/oPlayer.yy",},"order":4,},
     {"id":{"name":"sWheel2","path":"sprites/sWheel2/sWheel2.yy",},"order":3,},
     {"id":{"name":"Sprite10","path":"sprites/Sprite10/Sprite10.yy",},"order":8,},
