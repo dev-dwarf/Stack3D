@@ -13,6 +13,7 @@ z = 0;
 // set up gpu
 gpu_set_ztestenable(true);
 gpu_set_zwriteenable(true);
+
 // leads to an interesting glitchy effect
 //gpu_set_cullmode(cull_counterclockwise)
 
@@ -21,7 +22,7 @@ gpu_set_zwriteenable(true);
 
 // tilt from z axis, where a value of 0 would be directly top down.
 incline_angle = 45;
-incline_minimum = 15;
+incline_minimum = 0;
 incline_maximum = 75;
 
 camera_width  = default_camera_width ;
@@ -41,5 +42,5 @@ projected_mouse_y  = 0;
 #region demo stuff
 click_x = 0;
 click_y = 0;
-sensitivity = 0.01;
+sensitivity = 0.1;
 #endregion

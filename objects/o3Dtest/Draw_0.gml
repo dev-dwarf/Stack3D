@@ -34,7 +34,8 @@ switch shader_mode {
 with pDepth {
 	event_perform(ev_draw, 0);
 }
+	
+	shader_reset();
 
 // IMPORTANT! reset world matrix and shader for other drawing
 matrix_set(matrix_world, matrix_build_identity());
-shader_reset();

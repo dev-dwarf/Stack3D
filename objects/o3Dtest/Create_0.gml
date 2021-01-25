@@ -5,24 +5,9 @@ shader_mode = 6;
 
 // lower values will increase performance, but can make the background appear through models
 
-// use values of 4 or less
-stacking_fidelity = 16;
-
-// FUNCTION FOR DEPTH SORTING
-function compute_3d_depth() {
-
-	var _x				= argument[0];
-	var _y				= argument[1];
-	var _z				= argument[2];
-
-	var _depth = _x * dcos(90 + oCamera.camera_angle) +
-				 _y * dsin(90 + oCamera.camera_angle) +
-				 _z;
-
-	return -1 * _depth;
-
-
-}
+// values equal or higher than 4 will use z-tilting when building the models,
+// which can fill in gaps between the vertices
+stacking_fidelity = 8;
 
 // CREATE A FORMAT AND RETRIEVE THE TEXTURE FOR THE SPRITE STACKING TO USE
 format = create_vertex_format();
