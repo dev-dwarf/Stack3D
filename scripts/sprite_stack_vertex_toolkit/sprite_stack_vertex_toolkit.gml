@@ -362,7 +362,7 @@
 			);
 		}
 		
-		// top
+		 //top
 		vertex_quad_color(vertex_buffer, color, 1.0, 
 		[-w, -l, -h],
 		[ w, -l, -h],
@@ -373,6 +373,116 @@
 		[uvs[0], uvs[1]+(uvs[3]-uvs[1])*height/s_height],
 		[uvs[2], uvs[1]+(uvs[3]-uvs[1])*height/s_height]
 		);
+			
+		vertex_end(vertex_buffer)
+		return vertex_buffer;
+	}
+	
+	///@desc create_3d_wall_no_top
+	///@param width
+	///@param length
+	///@param height
+	///@param sprite_index
+	///@param color
+	///@param vertex_format
+	///@param [skips]
+	function create_3d_wall_no_top(width, length, height, sprite_index, color, vertex_format) {
+		#region About
+		
+			/*			create_wall_color
+
+			creates a textured 3d wall with specified width, length and height, with centered origin.
+			See oCube for example usage.
+			
+			WIDTH____________L
+			|				|e
+			|				|n
+			|---------------|g
+			|_______________|t
+			|		| height|h
+			|		|		|
+			--------|--------
+			
+			The texture should be laid out as a 1 frame, png image, with the wide sides of the textures connecting
+			to each other vertically.
+
+			_____east texture
+			|				|
+			|				|
+			|				|
+			_____north texture
+			|				|
+			|				|
+			|				|
+			_____west texture
+			|				|
+			|				|
+			|				|
+			_____south texture
+			|				|
+			|				|
+			|				|
+			bottom texture _|
+			|				|
+			|_______________|
+			
+			Don't leave any gaps in the texture!
+			
+			width, length, height
+			sprite_index
+			color,
+			vertex_format
+			skips, optional array parameter that lets certain faces be ignored [0 -> east, 1 -> north, 2 -> west, 3 -> south]
+			*/
+		
+		#endregion
+		
+		var skips = array_create(4, 0);
+		if (argument_count > 6) {
+			skips = argument[6];
+		}
+		
+		var texture = sprite_get_texture(sprite_index, 0);
+		var uvs = texture_get_uvs(texture);
+		var s_height = sprite_get_height(sprite_index);
+		
+		var vertex_buffer = vertex_create_buffer()
+		vertex_begin(vertex_buffer, vertex_format);
+		
+		var w = width/2, l = length/2, h = height;
+		
+		// bottom
+		vertex_quad_color(vertex_buffer, color, 1.0, 
+		[-w, -l, 0],
+		[ w, -l, 0],
+		[-w,  l, 0],
+		[ w,  l, 0],
+		[uvs[0], uvs[1]+(uvs[3]-uvs[1])*4*height/s_height],
+		[uvs[2], uvs[1]+(uvs[3]-uvs[1])*4*height/s_height],
+		[uvs[0], uvs[3]],
+		[uvs[2], uvs[3]]
+		);
+		
+		// sides
+		for (var i = 0; i < 4; i++) {
+			if (skips[i]) continue;
+			
+			var s = dsin(i*90 + 90),
+				c = dcos(i*90 + 90);
+				//s2 = dsin((i+1)*90),
+				//c2 = dsin((i+1)*90);
+				
+			vertex_quad_color(vertex_buffer, color, 1.0,
+			[-w * c + w * s, l * c + -w * s, -h],
+			[ w * c + w * s, l * c +  w * s, -h],
+			[-w * c + w * s, l * c + -w * s,  0],
+			[ w * c + w * s, l * c +  w * s,  0],
+			[uvs[0], uvs[1]+(uvs[3]-uvs[1])*(i)*height/s_height],
+			[uvs[2], uvs[1]+(uvs[3]-uvs[1])*(i)*height/s_height],
+			[uvs[0], uvs[1]+(uvs[3]-uvs[1])*(i+1)*height/s_height],
+			[uvs[2], uvs[1]+(uvs[3]-uvs[1])*(i+1)*height/s_height]
+			);
+		}
 			
 		vertex_end(vertex_buffer)
 		return vertex_buffer;
