@@ -6,3 +6,7 @@ y_tilt = 0;
 image_zscale = image_xscale;
 
 visible = false; // we dont want the object drawing itself
+
+draw_metadata = "";
+draw_buffer = noone;
+draw_texture = noone;

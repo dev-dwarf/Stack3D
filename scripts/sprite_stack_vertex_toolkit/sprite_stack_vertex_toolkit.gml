@@ -104,12 +104,21 @@
 	}
 #endregion
 #region -------------------------- Model Loading functions
+
+	// call to reset buffer and texture when sprite or model changes
+	function reload_buffer_and_texture() {
+		draw_buffer	= o3Dtest.buffers[? string(sprite_index)+draw_metadata];
+		draw_texture = o3Dtest.textures[? string(sprite_index)+draw_metadata];
+	}
+
+
 	// For use by Manager object
 	function load_sprite() {
 		#region About
 			///@param sprite_index
 			///@param layer_count
 			///@param [optional] fidelity
+			///@param [optional] ds_map_metada
 			
 			/*
 				This function loads a sprite stack model into memory, and stores its texture.
@@ -125,25 +134,29 @@
 		#region set parameters
 		var _sprite_index = argument[0], 
 		layer_count = argument[1], 
-		fidelity = stacking_fidelity;
+		fidelity = stacking_fidelity,		
+		_str = string(_sprite_index);
+
 		if (argument_count > 2) fidelity = argument[2];
+		if (argument_count > 3) _str += argument[3];
 		#endregion
 		
-		if (is_undefined(buffers[? _sprite_index])) {
-			textures[? _sprite_index] = sprite_get_texture(_sprite_index, 0);
+		if (is_undefined(buffers[? _str])) {
+			textures[? _str] = sprite_get_texture(_sprite_index, 0);
 
 			// USE THE FUNCTIONS TO LOAD THE MODEL
-			buffers[? _sprite_index] = load_stack_sprite(_sprite_index, layer_count, format, stacking_fidelity);
+			buffers[? _str] = load_stack_sprite(_sprite_index, layer_count, format, stacking_fidelity);
 
 			// FREEZE THE MODEL (optional)
-			vertex_freeze(buffers[? _sprite_index]); // makes the buffer read only, but increases performance significantly.
+			vertex_freeze(buffers[? _str]); // makes the buffer read only, but increases performance significantly.
 		}
 	}	
+	
 	function load_other() {
 		#region About
 			///@param sprite_index
 			///@param vertex_buffer
-			
+			///@param [optional] ds_map_metada
 			/*
 				This function loads a misc model into memory. (this is useful for when you want to
 				include normal 3d models with your sprite stacking).
@@ -158,17 +171,19 @@
 		
 		#region set parameters
 		var _sprite_index = argument[0], 
-		vertex_buffer = argument[1];
+		vertex_buffer = argument[1],
+		_str = string(_sprite_index);
+		if (argument_count > 2) _str += argument[2];
 		#endregion
 		
-		if (is_undefined(buffers[? _sprite_index])) {
-			textures[? _sprite_index] = sprite_get_texture(_sprite_index, 0);
+		if (is_undefined(buffers[? _str])) {
+			textures[? _str] = sprite_get_texture(_sprite_index, 0);
 
 			// USE THE FUNCTIONS TO LOAD THE MODEL
-			buffers[? _sprite_index] = vertex_buffer;
+			buffers[? _str] = vertex_buffer;
 
 			// FREEZE THE MODEL (optional)
-			vertex_freeze(buffers[? _sprite_index]); // makes the buffer read only, but increases performance significantly.
+			vertex_freeze(buffers[? _str]); // makes the buffer read only, but increases performance significantly.
 		}	
 	}
 
@@ -209,8 +224,6 @@
 		// get the texture and its UVs, so that we can build the model
 		var uvs = sprite_get_uvs(_sprite_index, 0);
 	
-		show_debug_message(string(uvs));
-
 		// begin construction of the model
 		vertex_begin(vertex_buffer, vertex_format);
 
@@ -281,9 +294,17 @@
 	
 		return vertex_buffer;
 	}		
+		
 	function create_3d_wall(width, length, height, sprite_index, color, vertex_format) {
 		#region About
-		
+		///@desc create_3d_wall
+		///@param width
+		///@param length
+		///@param height
+		///@param sprite_index
+		///@param color
+		///@param vertex_format
+		///@param [skips]
 			/*			create_wall_color
 
 			creates a textured 3d wall with specified width, length and height, with centered origin.
@@ -321,6 +342,10 @@
 			*/
 		
 		#endregion
+		var skips = array_create(4, 0);
+		if (argument_count > 6) {
+			skips = argument[6];
+		}
 		
 		var texture = sprite_get_texture(sprite_index, 0);
 		var uvs = texture_get_uvs(texture);
@@ -345,6 +370,8 @@
 		
 		// sides
 		for (var i = 0; i < 4; i++) {
+			if (skips[i]) continue;
+			
 			var s = dsin(i*90),
 				c = dcos(i*90);
 				//s2 = dsin((i+1)*90),
@@ -378,17 +405,16 @@
 		return vertex_buffer;
 	}
 	
-	///@desc create_3d_wall_no_top
-	///@param width
-	///@param length
-	///@param height
-	///@param sprite_index
-	///@param color
-	///@param vertex_format
-	///@param [skips]
 	function create_3d_wall_no_top(width, length, height, sprite_index, color, vertex_format) {
 		#region About
-		
+		///@desc create_3d_wall_no_top
+		///@param width
+		///@param length
+		///@param height
+		///@param sprite_index
+		///@param color
+		///@param vertex_format
+		///@param [skips]
 			/*			create_wall_color
 
 			creates a textured 3d wall with specified width, length and height, with centered origin.

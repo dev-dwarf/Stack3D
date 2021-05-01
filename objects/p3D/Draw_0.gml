@@ -1,6 +1,4 @@
 /// @description draw 3d model
-var buffer	= o3Dtest.buffers[? sprite_index];
-var texture = o3Dtest.textures[? sprite_index];
-	
-if (is_undefined(buffer) or is_undefined(texture)) exit;
-draw_stack_self(buffer, texture);
+if (draw_buffer == noone and draw_texture == noone) reload_buffer_and_texture();
+if (is_undefined(draw_buffer) or is_undefined(draw_texture)) exit;
+draw_stack_self(draw_buffer, draw_texture);
