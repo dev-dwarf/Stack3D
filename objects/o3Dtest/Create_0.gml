@@ -3,8 +3,11 @@ show_debug_overlay(true);
 
 shader_mode = 6;
 
-// lower values will increase performance, but can make the background appear through models
+// surface to draw to
+drawing_surface = noone;
+drawing_surface_resolution = 2; // lower -> more pixelly
 
+// lower values will increase performance, but can make the background appear through models
 // values equal or higher than 4 will use z-tilting when building the models,
 // which can fill in gaps between the vertices
 stacking_fidelity = 8;

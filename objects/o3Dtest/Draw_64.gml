@@ -1,5 +1,7 @@
-/// @description demo text -- ignore
+// @description draw surface to screen
+draw_surface_stretched(drawing_surface, 0, 0, surface_get_width(application_surface), surface_get_height(application_surface));
 
+/// @description demo text -- ignore
 draw_set_font(Font1);
 draw_set_halign(fa_right);
 

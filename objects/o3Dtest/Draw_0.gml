@@ -1,5 +1,7 @@
 /// @description draw 3d models
 
+if !(surface_exists(drawing_surface)) drawing_surface = surface_create(oCamera.default_camera_height*drawing_surface_resolution, oCamera.default_camera_height*drawing_surface_resolution);
+
 // make sure you draw the models using a shader
 //   default is shdStack
 switch shader_mode {
@@ -31,11 +33,15 @@ switch shader_mode {
 	break;
 }
 
+surface_set_target(drawing_surface);
+draw_clear(c_black);
+camera_apply(oCamera.camera);
 
 with pDepth {
 	event_perform(ev_draw, 0);
 }
 	
+surface_reset_target();
 shader_reset();
 
 // IMPORTANT! reset world matrix and shader for other drawing
