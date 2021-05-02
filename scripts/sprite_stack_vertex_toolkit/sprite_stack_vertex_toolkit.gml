@@ -111,7 +111,6 @@
 		draw_texture = o3Dtest.textures[? string(sprite_index)+draw_metadata];
 	}
 
-
 	// For use by Manager object
 	function load_sprite() {
 		#region About
@@ -613,6 +612,7 @@
 		matrix_set(matrix_world, matrix_multiply(oCamera.billboard_matrix, inst_matrix));
 		draw_sprite_ext(sprite_index, image_index, 0, 0, image_xscale, image_yscale, 0, image_blend, image_alpha);
 	}
+	
 	function draw_normal_self() {
 		#region About
 			/*		 draw normal self
@@ -625,10 +625,11 @@
 			*/
 		#endregion
 		
-		var inst_matrix = matrix_build( x, y, -z, x_tilt, y_tilt, 0, 1.0, 1.0, image_zscale);
+		var inst_matrix = matrix_build( x, y, -z, x_tilt, y_tilt, image_angle, 1.0, 1.0, image_zscale);
 		matrix_set(matrix_world, inst_matrix);
 		draw_sprite_ext(sprite_index, image_index, 0, 0, image_xscale, image_yscale, 0, image_blend, image_alpha);
 	}
+	
 	function draw_normal_ext(sprite_index, image_index, x, y, z, x_tilt, y_tilt, angle, image_xscale, image_yscale, image_zscale, image_blend, image_alpha) {
 		#region About
 			
@@ -658,9 +659,69 @@
 		
 		var inst_matrix = matrix_build( x, y, -z, x_tilt, y_tilt, 0, 1.0, 1.0, image_zscale);
 		matrix_set(matrix_world, inst_matrix);
-		draw_sprite_ext(sprite_index, image_index, 0, 0, image_xscale, image_yscale, 0, image_blend, image_alpha);
+		draw_sprite_ext(sprite_index, image_index, 0, 0, image_xscale, image_yscale, angle, image_blend, image_alpha);
 	}
+	
+	function draw_surface_billboard_ext(surface, x, y, z, x_tilt, y_tilt, angle, image_xscale, image_yscale, image_zscale, image_blend, image_alpha) {
+		#region About
+			/*			 draw billboard ext
 
+			draws a billboarded surface
+
+			important notes: 
+			1. you will have to manually reset the world matrix after drawing. Look at o3Dtest for an example.
+
+			surface	--> sprite to use
+			x				--> x coord to draw at
+			y				--> y coord to draw at
+			z				--> z coord to draw at
+			x_tilt			--> x angle to tilt the model
+			y_tilt			--> y angle to tilt the model
+			angle			--> z angle (used in a similar way to image_angle in 2d games)
+			image_xscale	--> scale to apply along x axis of model
+			image_yscale	--> scale to apply along y axis of model
+			image_zscale	--> scale to apply along z axis of model
+			image_blend		--> image_blend of the sprite
+			image_alpha		--> image_alpha of the sprite
+		
+			*/
+		#endregion
+		
+		var inst_matrix = matrix_build( x, y, -z, x_tilt, y_tilt, 0, 1.0, 1.0, image_zscale);
+		matrix_set(matrix_world, matrix_multiply(oCamera.billboard_matrix, inst_matrix));
+		draw_surface_ext(surface, 0, 0, image_xscale, image_yscale, angle, image_blend, image_alpha);
+	}
+	
+	function draw_surface_normal_ext(surface, x, y, z, x_tilt, y_tilt, angle, image_xscale, image_yscale, image_zscale, image_blend, image_alpha) {
+		#region About
+			
+			/*			 draw surface normal ext 
+
+			draws a "normal" surface
+
+			important notes: 
+			1. you will have to manually reset the world matrix after drawing. Look at o3Dtest for an example.
+
+			surface			--> surface to use
+			x				--> x coord to draw at
+			y				--> y coord to draw at
+			z				--> z coord to draw at
+			x_tilt			--> x angle to tilt the model
+			y_tilt			--> y angle to tilt the model
+			angle			--> z angle (used in a similar way to image_angle in 2d games)
+			image_xscale	--> scale to apply along x axis of model
+			image_yscale	--> scale to apply along y axis of model
+			image_zscale	--> scale to apply along z axis of model
+			image_blend		--> image_blend of the sprite
+			image_alpha		--> image_alpha of the sprite
+			*/
+		#endregion
+		
+		var inst_matrix = matrix_build( x, y, -z, x_tilt, y_tilt, 0, 1.0, 1.0, image_zscale);
+		matrix_set(matrix_world, inst_matrix);
+		draw_surface_ext(surface, 0, 0, image_xscale, image_yscale, angle, image_blend, image_alpha);
+	}
+		
 #endregion
 #region -------------------------- Mouse functions
 
