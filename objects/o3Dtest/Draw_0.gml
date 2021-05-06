@@ -33,15 +33,17 @@ switch shader_mode {
 	break;
 }
 
-surface_set_target(drawing_surface);
+//surface_set_target(drawing_surface);
 draw_clear(c_black);
 camera_apply(oCamera.camera);
 
 with pDepth {
+	draw_can_draw = true;
 	event_perform(ev_draw, 0);
+	draw_can_draw = false;
 }
 	
-surface_reset_target();
+//surface_reset_target();
 shader_reset();
 
 // IMPORTANT! reset world matrix and shader for other drawing

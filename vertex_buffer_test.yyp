@@ -2,6 +2,7 @@
   "resources": [
     {"id":{"name":"shdWobble","path":"shaders/shdWobble/shdWobble.yy",},"order":4,},
     {"id":{"name":"oCamera","path":"objects/oCamera/oCamera.yy",},"order":1,},
+    {"id":{"name":"oSurfaceExample","path":"objects/oSurfaceExample/oSurfaceExample.yy",},"order":10,},
     {"id":{"name":"o3Dtest","path":"objects/o3Dtest/o3Dtest.yy",},"order":0,},
     {"id":{"name":"oCoin","path":"objects/oCoin/oCoin.yy",},"order":1,},
     {"id":{"name":"shdStack","path":"shaders/shdStack/shdStack.yy",},"order":0,},

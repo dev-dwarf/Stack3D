@@ -662,7 +662,7 @@
 		draw_sprite_ext(sprite_index, image_index, 0, 0, image_xscale, image_yscale, angle, image_blend, image_alpha);
 	}
 	
-	function draw_surface_billboard_ext(surface, x, y, z, x_tilt, y_tilt, angle, image_xscale, image_yscale, image_zscale, image_blend, image_alpha) {
+	function draw_surface_billboard_ext(surface, x, y, z, origin_x, origin_y, x_tilt, y_tilt, angle, image_xscale, image_yscale, image_zscale, image_blend, image_alpha) {
 		#region About
 			/*			 draw billboard ext
 
@@ -675,6 +675,8 @@
 			x				--> x coord to draw at
 			y				--> y coord to draw at
 			z				--> z coord to draw at
+			origin_x		--> x coord to draw surface at
+			origin_y		--> y coord to draw surface at
 			x_tilt			--> x angle to tilt the model
 			y_tilt			--> y angle to tilt the model
 			angle			--> z angle (used in a similar way to image_angle in 2d games)
@@ -689,10 +691,10 @@
 		
 		var inst_matrix = matrix_build( x, y, -z, x_tilt, y_tilt, 0, 1.0, 1.0, image_zscale);
 		matrix_set(matrix_world, matrix_multiply(oCamera.billboard_matrix, inst_matrix));
-		draw_surface_ext(surface, 0, 0, image_xscale, image_yscale, angle, image_blend, image_alpha);
+		draw_surface_ext(surface, -origin_x, -origin_y, image_xscale, image_yscale, angle, image_blend, image_alpha);
 	}
 	
-	function draw_surface_normal_ext(surface, x, y, z, x_tilt, y_tilt, angle, image_xscale, image_yscale, image_zscale, image_blend, image_alpha) {
+	function draw_surface_normal_ext(surface, x, y, z, origin_x, origin_y, x_tilt, y_tilt, angle, image_xscale, image_yscale, image_zscale, image_blend, image_alpha) {
 		#region About
 			
 			/*			 draw surface normal ext 
@@ -706,6 +708,8 @@
 			x				--> x coord to draw at
 			y				--> y coord to draw at
 			z				--> z coord to draw at
+			origin_x		--> x coord to draw surface at
+			origin_y		--> y coord to draw surface at
 			x_tilt			--> x angle to tilt the model
 			y_tilt			--> y angle to tilt the model
 			angle			--> z angle (used in a similar way to image_angle in 2d games)
@@ -719,7 +723,7 @@
 		
 		var inst_matrix = matrix_build( x, y, -z, x_tilt, y_tilt, 0, 1.0, 1.0, image_zscale);
 		matrix_set(matrix_world, inst_matrix);
-		draw_surface_ext(surface, 0, 0, image_xscale, image_yscale, angle, image_blend, image_alpha);
+		draw_surface_ext(surface, -origin_x, -origin_y, image_xscale, image_yscale, angle, image_blend, image_alpha);
 	}
 		
 #endregion
