@@ -721,7 +721,7 @@
 			*/
 		#endregion
 		
-		var inst_matrix = matrix_build( x, y, -z, x_tilt, y_tilt, 0, 1.0, 1.0, image_zscale);
+		var inst_matrix = matrix_build( x, y, -z, x_tilt, y_tilt, 0, -1.0, 1.0, image_zscale);
 		matrix_set(matrix_world, inst_matrix);
 		draw_surface_ext(surface, -origin_x, -origin_y, image_xscale, image_yscale, angle, image_blend, image_alpha);
 	}
